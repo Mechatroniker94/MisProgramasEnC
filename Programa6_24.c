@@ -6,17 +6,18 @@
 
 void mostrarTablero(int b[][TX]);
 void moverCaballo(int b[][TX]);
-int horizontal[8] = {2,1,-1,-2,-2,-1,1,2};      //Vector horizontal de movimientos
-int vertical[8] = {-1,-2,-2,-1,1,2,2,1};        //Vector vertical de movimientos
+int columnas[8] = {2,1,-1,-2,-2,-1,1,2};      //Vector horizontal de movimientos
+int filas[8] = {-1,-2,-2,-1,1,2,2,1};        //Vector vertical de movimientos
 
-int posX = 4;              //Posicion inicial en  X del caballo
-int posY = 4;              //Posicion inicial en Y del caballo
+int posColumnas = 1;              //Posicion inicial en  X del caballo
+int posFilas = 1;
+int control = 0;             //Posicion inicial en Y del caballo
 
 
 int main(){
     int tablero[TX][TY] ={{0},{0}};
-    tablero[posX][posY] = 1;
-    for(int k = 0; k < 64; k++){
+    tablero[posColumnas][posFilas] = 1;
+    for(int k = 0; k < 10; k++){
         moverCaballo(tablero);
     }
     mostrarTablero(tablero);
@@ -25,20 +26,21 @@ int main(){
 }//Fin del main
 
 void moverCaballo(int b[][TX]){
-    int auxX = posX;
-    int auxY = posY;
-    for(int i = 0; i < 3; i++){
-        auxX += vertical[i];
-        auxY += horizontal[i];
-        printf("%i, %i\n",auxX,auxY);
-            if(auxX > 0 && auxX < 7 && auxY > 0 && auxY < 7 && b[auxX][auxY] == 0 ){
-                b[auxX][auxY] = 1;
-                posX = auxX;
-                posY = auxY;
-                break;
+    int auxX = posColumnas;
+    int auxY = posFilas;
+    for(int i = 0; i < 7; i++){
+        auxX += columnas[i];
+        auxY += filas[i];
+        //printf("%i, %i",auxX,auxY);
+        if(auxX >= 0 && auxX <= 7 && auxY >= 0 && auxY <= 7 && b[auxY][auxX] == 0 ){
+            b[auxY][auxX] = 1;
+            posColumnas = auxX;
+            posFilas = auxY;
+            printf("%i \n", i);
+            break;
         }//Fin del if
-        auxX = posX;
-        auxY = posY;
+        auxX = posColumnas;
+        auxY = posFilas;
     }//FIn del for
 
 }//FIn de la funcion caballo
